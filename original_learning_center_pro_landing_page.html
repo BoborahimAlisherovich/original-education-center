@@ -11,6 +11,7 @@
     <link rel="canonical" href="https://original-learning-center.uz/">
     <meta name="theme-color" content="#0B0F17">
     <link rel="icon" type="image/png" href="tmphxoblbaf.png">
+    <link rel="preload" href="video_2026-10-26_23-34-48.mp4" as="video" type="video/mp4">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="uz_UZ">
     <meta property="og:site_name" content="Original Learning Center">
@@ -331,6 +332,40 @@
 <body class="bg-slate-50 dark:bg-brand-obsidian text-slate-900 dark:text-white font-sans antialiased selection:bg-brand-gold selection:text-brand-obsidian pb-24 lg:pb-0 transition-colors duration-300">
 
     <!-- ===================================================================== -->
+    <!-- PRELOADER / VIDEO LOADING OVERLAY                                     -->
+    <!-- ===================================================================== -->
+    <div id="site-preloader" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#0B0F17] transition-all duration-500 ease-out select-none">
+        <div class="relative flex flex-col items-center text-center px-6 max-w-sm w-full">
+            <!-- Pulsing Logo Glow -->
+            <div class="relative mb-5">
+                <div class="absolute -inset-4 rounded-full bg-amber-400/25 blur-xl animate-pulse"></div>
+                <div class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-white/5 border border-amber-400/30 flex items-center justify-center shadow-2xl backdrop-blur-md">
+                    <img src="tmphxoblbaf.png" alt="Original Learning Center" class="w-12 h-12 sm:w-14 sm:h-14 object-contain animate-pulse"/>
+                </div>
+            </div>
+
+            <!-- Title -->
+            <h2 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight mb-1">
+                Original <span class="text-amber-400">Learning Center</span>
+            </h2>
+            <p class="text-xs text-gray-400 font-medium mb-6 tracking-wide">
+                Kelajagingiz sari ilk qadam
+            </p>
+
+            <!-- Loading Progress Bar -->
+            <div class="w-56 h-1.5 bg-white/10 rounded-full overflow-hidden mb-2.5 relative">
+                <div id="preloader-progress-bar" class="h-full bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 rounded-full w-0 transition-all duration-200 ease-out"></div>
+            </div>
+
+            <!-- Loading status text -->
+            <div class="flex items-center justify-between w-56 text-[11px] text-gray-400 font-mono">
+                <span id="preloader-status-text">Video yuklanmoqda...</span>
+                <span id="preloader-percent-text">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
     <!-- 1. FLOATING CAPSULE HEADER (EXACT REFERENCE INTER NATION STYLE)       -->
     <!-- ===================================================================== -->
     <header class="fixed top-3 sm:top-5 inset-x-0 z-50 px-3 sm:px-6 pointer-events-none">
@@ -454,7 +489,7 @@
                     muted
                     loop
                     playsinline
-                    preload="metadata"
+                    preload="auto"
                     poster="tmphxoblbaf.png"
                     aria-label="Original Learning Center background video">
                     <source src="video_2026-10-26_23-34-48.mp4" type="video/mp4">
@@ -2827,7 +2862,76 @@
             setTimeout(() => closeEnrollModal(), 1800);
         }
 
+        // =====================================================================
+        // PRELOADER & VIDEO BUFFER CONTROLLER
+        // =====================================================================
+        function initVideoPreloader() {
+            const preloader = document.getElementById('site-preloader');
+            const progressBar = document.getElementById('preloader-progress-bar');
+            const percentText = document.getElementById('preloader-percent-text');
+            const statusText = document.getElementById('preloader-status-text');
+            const heroVideo = document.getElementById('hero-bg-video');
+
+            if (!preloader) return;
+
+            let progress = 0;
+            let isLoaded = false;
+            const startTime = Date.now();
+            const minDisplayTime = 1100;
+            const maxTimeout = 2800;
+
+            function updateProgress(val, status) {
+                progress = Math.min(100, Math.max(progress, Math.round(val)));
+                if (progressBar) progressBar.style.width = `${progress}%`;
+                if (percentText) percentText.textContent = `${progress}%`;
+                if (status && statusText) statusText.textContent = status;
+            }
+
+            const interval = setInterval(() => {
+                if (!isLoaded && progress < 85) {
+                    progress += Math.floor(Math.random() * 9) + 4;
+                    updateProgress(progress, 'Video yuklanmoqda...');
+                }
+            }, 100);
+
+            function finishLoading() {
+                if (isLoaded) return;
+                isLoaded = true;
+                clearInterval(interval);
+
+                const elapsed = Date.now() - startTime;
+                const remaining = Math.max(0, minDisplayTime - elapsed);
+
+                setTimeout(() => {
+                    updateProgress(100, 'Tayyor!');
+                    if (heroVideo) {
+                        heroVideo.play().catch(() => {});
+                    }
+                    setTimeout(() => {
+                        preloader.classList.add('opacity-0', 'pointer-events-none', 'scale-105');
+                        setTimeout(() => {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }, 250);
+                }, remaining);
+            }
+
+            if (heroVideo) {
+                if (heroVideo.readyState >= 3) {
+                    finishLoading();
+                } else {
+                    heroVideo.addEventListener('canplay', finishLoading, { once: true });
+                    heroVideo.addEventListener('loadeddata', () => updateProgress(70, 'Kadrlar tayyorlanmoqda...'), { once: true });
+                    heroVideo.addEventListener('canplaythrough', finishLoading, { once: true });
+                    heroVideo.addEventListener('error', finishLoading, { once: true });
+                }
+            }
+
+            setTimeout(finishLoading, maxTimeout);
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
+            initVideoPreloader();
             renderAllDynamicSections();
             setLanguage('uz');
             startAutoCarousels();
