@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Original Learning Center — Bilim sari qadam qo‘ying!</title>
     <meta name="description" content="Original Learning Center - ingliz tili, IELTS, CEFR, matematika va mental arifmetika kurslari. Tajribali ustozlar, yuqori natijalar va qulay manzil.">
-    <meta name="keywords" content="Original Learning Center, IELTS, CEFR, ingliz tili, matematika, mental arifmetika, o'quv markazi, kurslar, Toshkent">
+    <meta name="keywords" content="Original Learning Center, IELTS, CEFR, ingliz tili, matematika, mental arifmetika, o‘quv markazi, kurslar, Toshkent">
     <meta name="author" content="Original Learning Center">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://original-learning-center.uz/">
@@ -29,7 +29,7 @@
             "name": "Original Learning Center",
             "url": "https://original-learning-center.uz/",
             "logo": "tmphxoblbaf.png",
-            "description": "IELTS, CEFR, ingliz tili, matematika va mental arifmetika kurslarini taklif qiluvchi ta'lim markazi.",
+            "description": "IELTS, CEFR, ingliz tili, matematika va mental arifmetika kurslarini taklif qiluvchi ta’lim markazi.",
             "telephone": "+998910236061",
             "address": {
                 "@type": "PostalAddress",
@@ -326,6 +326,11 @@
                 display: none !important;
             }
         }
+        /* Admin panel animations */
+        @keyframes admSlide { from { transform: translateX(100%); } to { transform: none; } }
+        .adm-slide { animation: admSlide .22s ease-out; }
+        @keyframes admToast { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+        .adm-toast { animation: admToast .2s ease-out; }
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-brand-obsidian text-slate-900 dark:text-white font-sans antialiased selection:bg-brand-gold selection:text-brand-obsidian pb-24 lg:pb-0 transition-colors duration-300">
@@ -474,7 +479,7 @@
                 </span>
 
                 <h1 data-i18n="hero_title" class="font-display font-black text-2xl sm:text-4xl lg:text-[44px] text-white uppercase leading-[1.08] tracking-tight drop-shadow-xl mb-4">
-                    BILIM SARI QADAM QU‘YING.<br class="hidden sm:inline"/> KELAJAGINGIZNI YARATING!
+                    BILIM SARI QADAM QO‘YING.<br class="hidden sm:inline"/> KELAJAGINGIZNI YARATING!
                 </h1>
 
                 <p data-i18n="hero_desc" class="text-gray-200 text-sm sm:text-[15px] lg:text-base max-w-xl leading-relaxed font-normal drop-shadow mb-7">
@@ -520,7 +525,7 @@
                         <div class="liquid-glass-card rounded-2xl p-4">
                             <div class="text-brand-gold text-xl mb-1">🎯</div>
                             <h3 class="font-display font-extrabold text-sm text-slate-900 dark:text-white mb-1">Ta’lim yo‘nalishlari</h3>
-                            <p class="text-xs text-slate-500 dark:text-gray-400">IELTS, CEFR, Matematika, Arab, Rus, Turk va Nemis tillari.</p>
+                            <p class="text-xs text-slate-500 dark:text-gray-400">IELTS, CEFR, matematika, arab, rus, turk va nemis tillari.</p>
                         </div>
                         <div class="liquid-glass-card rounded-2xl p-4">
                             <div class="text-brand-gold text-xl mb-1">⚡</div>
@@ -779,7 +784,7 @@
                         BIZNING MANZILIMIZ
                     </h2>
                     <p data-i18n="loc_subtitle" class="text-slate-600 dark:text-gray-400 text-sm sm:text-base mt-1">
-                        Filialimiz Dushanbadan–Shanbagacha, soat 08:00 dan 20:00 gacha ishlaydi.
+                        Filialimiz dushanbadan shanbagacha, soat 08:00 dan 20:00 gacha ishlaydi.
                     </p>
                 </div>
                 <a id="branch-external-map-link" href="https://www.google.com/maps?q=41.169750,69.221655&ll=41.169750,69.221655&z=16" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-full bg-brand-gold text-brand-obsidian font-display font-extrabold text-xs sm:text-sm inline-flex items-center gap-2 self-start sm:self-end shadow-md">
@@ -1055,18 +1060,14 @@
             <form onsubmit="handleAdminLogin(event)" class="space-y-3.5">
                 <div>
                     <label class="text-xs font-bold block mb-1">Login</label>
-                    <input type="text" id="admin-login-input" value="admin" required class="w-full px-4 py-3 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/15 text-sm font-bold"/>
+                    <input type="text" id="admin-login-input" required autocomplete="username" class="w-full px-4 py-3 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/15 text-sm font-bold"/>
                 </div>
                 <div>
                     <label class="text-xs font-bold block mb-1">Parol</label>
-                    <input type="password" id="admin-pass-input" value="admin123" required class="w-full px-4 py-3 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/15 text-sm font-bold"/>
+                    <input type="password" id="admin-pass-input" required autocomplete="current-password" class="w-full px-4 py-3 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/15 text-sm font-bold"/>
                 </div>
                 <div id="admin-login-error" class="hidden text-xs font-bold text-red-500">
-                    ❌ Login yoki parol noto‘g‘ri! (admin / admin123)
-                </div>
-                <div class="flex items-center justify-between text-[11px] text-slate-400 pt-1">
-                    <span>Standart: <b>admin / admin123</b></span>
-                    <button type="button" onclick="fillDemoLogin()" class="text-brand-gold font-bold hover:underline">Avto-to‘ldirish</button>
+                    ❌ Login yoki parol noto‘g‘ri!
                 </div>
                 <button type="submit" class="w-full py-3.5 rounded-full bg-gradient-to-r from-brand-gold to-brand-amber text-brand-obsidian font-display font-black text-sm">
                     Admin oynani ochish →
@@ -1078,213 +1079,78 @@
     <!-- ===================================================================== -->
     <!-- 16. DEDICATED FULL-SCREEN PRO ADMIN WORKSPACE (LIGHT/DARK SUPPORT)    -->
     <!-- ===================================================================== -->
-    <div id="admin-dashboard-modal" class="hidden fixed inset-0 z-[100] bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-white flex-col md:flex-row overflow-hidden transition-colors duration-300">
-        <!-- Left Professional Sidebar -->
-        <aside class="w-full md:w-72 bg-white dark:bg-slate-900 border-b md:border-b-0 md:border-r border-slate-200 dark:border-white/10 flex flex-col justify-between shrink-0">
-            <div>
-                <!-- Brand Header inside Admin -->
-                <div class="p-5 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-brand-gold to-brand-amber text-brand-obsidian font-display font-black flex items-center justify-center text-sm shadow-lg">
-                            <img src="tmphxoblbaf.png" alt="Original Learning Center logo" class="w-7 h-7 object-contain"/>
-                        </div>
-                        <div>
-                            <h3 class="font-display font-black text-sm text-slate-900 dark:text-white leading-tight">ORIGINAL CMS</h3>
-                            <span class="text-[11px] text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Pro Admin Panel
-                            </span>
-                        </div>
-                    </div>
-                    <button onclick="closeAdminDashboard()" class="md:hidden px-3 py-1.5 rounded-xl bg-slate-900/10 dark:bg-white/10 text-xs font-bold">
-                        ← Sayt
-                    </button>
-                </div>
+    <div id="admin-dashboard-modal" class="hidden fixed inset-0 z-[100] bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white overflow-hidden font-sans">
+        <div id="adm-sidebar-backdrop" onclick="admToggleSidebar(false)" class="hidden fixed inset-0 z-20 bg-slate-900/50 md:hidden"></div>
 
-                <!-- Left Sidebar Navigation Menu -->
-                <div class="p-3.5 space-y-1.5 flex md:flex-col overflow-x-auto md:overflow-visible">
-                    <button id="adm-tab-teachers" onclick="switchAdminTab('teachers')" class="adm-tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs sm:text-sm font-extrabold bg-brand-gold text-brand-obsidian transition-all shrink-0 text-left">
-                        <span class="text-base">👨‍🏫</span>
-                        <span>Ustozlar boshqaruvi</span>
-                    </button>
-                    <button id="adm-tab-results" onclick="switchAdminTab('results')" class="adm-tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs sm:text-sm font-bold text-slate-600 dark:text-gray-300 hover:bg-slate-900/5 dark:hover:bg-white/5 transition-all shrink-0 text-left">
-                        <span class="text-base">🏆</span>
-                        <span>Natijalar (IELTS TRF)</span>
-                    </button>
-                    <button id="adm-tab-courses" onclick="switchAdminTab('courses')" class="adm-tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs sm:text-sm font-bold text-slate-600 dark:text-gray-300 hover:bg-slate-900/5 dark:hover:bg-white/5 transition-all shrink-0 text-left">
-                        <span class="text-base">📚</span>
-                        <span>Kurslar va Narxlar</span>
-                    </button>
-                    <button id="adm-tab-partners" onclick="switchAdminTab('partners')" class="adm-tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs sm:text-sm font-bold text-slate-600 dark:text-gray-300 hover:bg-slate-900/5 dark:hover:bg-white/5 transition-all shrink-0 text-left">
-                        <span class="text-base">🤝</span>
-                        <span>Hamkor logotiplari</span>
-                    </button>
-                    <button id="adm-tab-branches" onclick="switchAdminTab('branches')" class="adm-tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs sm:text-sm font-bold text-slate-600 dark:text-gray-300 hover:bg-slate-900/5 dark:hover:bg-white/5 transition-all shrink-0 text-left">
-                        <span class="text-base">📍</span>
-                        <span>Manzil va Telegram Bot</span>
-                    </button>
+        <!-- Sidebar -->
+        <aside id="adm-sidebar" class="fixed md:static inset-y-0 left-0 z-30 w-64 shrink-0 -translate-x-full md:translate-x-0 transition-transform duration-200 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-white/10 flex flex-col">
+            <div class="h-16 px-4 flex items-center gap-3 border-b border-slate-200 dark:border-white/10">
+                <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-brand-gold to-brand-amber flex items-center justify-center shrink-0">
+                    <img src="tmphxoblbaf.png" alt="Original Learning Center logo" class="w-6 h-6 object-contain"/>
+                </div>
+                <div class="min-w-0">
+                    <div class="font-display font-extrabold text-sm leading-tight truncate">Original CMS</div>
+                    <div class="text-[11px] text-slate-500 dark:text-gray-400 flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Boshqaruv paneli
+                    </div>
                 </div>
             </div>
-
-            <!-- Sidebar Bottom Controls -->
-            <div class="hidden md:flex flex-col gap-2 p-4 border-t border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-950/50">
-                <button onclick="openAdminInStandaloneTab()" class="w-full py-2.5 px-3 rounded-xl bg-slate-900/5 dark:bg-white/5 hover:bg-slate-900/10 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-700 dark:text-gray-200 flex items-center justify-center gap-2 transition-colors">
-                    <span>Alohida brauzer oynada ochish</span>
-                    <span>↗</span>
-                </button>
-                <button onclick="resetToDefaultFakeData()" class="w-full py-2.5 px-3 rounded-xl bg-amber-500/15 hover:bg-amber-500 hover:text-brand-obsidian text-amber-600 dark:text-amber-400 text-xs font-bold transition-colors">
-                    ↺ Boshlang‘ich holatga qaytarish
-                </button>
-                <div class="grid grid-cols-2 gap-2 pt-1">
-                    <button onclick="closeAdminDashboard()" class="py-2.5 rounded-xl bg-slate-900/10 dark:bg-white/10 hover:bg-slate-900/20 dark:hover:bg-white/20 text-xs font-bold">
-                        ← Saytga qaytish
-                    </button>
-                    <button onclick="adminLogout()" class="py-2.5 rounded-xl bg-red-500/20 hover:bg-red-500 text-red-600 dark:text-red-400 hover:text-white text-xs font-bold transition-colors">
-                        Chiqish
-                    </button>
+            <div class="p-3">
+                <input type="search" oninput="admFilterNav(this.value)" placeholder="Bo‘limlarni qidirish..." class="w-full px-3 py-2 rounded-lg bg-slate-100 dark:bg-white/5 border border-transparent focus:border-brand-gold focus:outline-none text-sm"/>
+            </div>
+            <nav id="adm-nav" class="flex-1 overflow-y-auto px-3 pb-4 space-y-5"></nav>
+            <div class="p-3 border-t border-slate-200 dark:border-white/10 flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-brand-gold/20 text-amber-700 dark:text-brand-gold font-bold text-sm flex items-center justify-center">A</div>
+                <div class="min-w-0 flex-1">
+                    <div class="text-sm font-semibold leading-tight">admin</div>
+                    <div class="text-[11px] text-slate-500 dark:text-gray-400">Administrator</div>
                 </div>
+                <button onclick="adminLogout()" title="Chiqish" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:text-red-600 hover:bg-red-500/10 transition-colors" id="adm-logout-btn"></button>
             </div>
         </aside>
 
-        <!-- Right Main Workspace Content -->
-        <main class="flex-1 flex flex-col h-full overflow-hidden bg-slate-100 dark:bg-slate-950">
-            <div class="px-6 py-4 border-b border-slate-200 dark:border-white/10 bg-white/70 dark:bg-slate-900/60 flex flex-wrap items-center justify-between gap-4">
-                <div>
-                    <h2 id="adm-workspace-title" class="font-display font-black text-lg sm:text-xl text-slate-900 dark:text-white">
-                        👨‍🏫 Ustozlar boshqaruvi
-                    </h2>
-                    <p class="text-xs text-slate-500 dark:text-gray-400">Barcha o‘zgarishlar darhol saqlanadi va asosiy sahifada aks etadi.</p>
+        <!-- Workspace -->
+        <main class="flex-1 flex flex-col min-w-0 h-full">
+            <header class="h-16 shrink-0 px-4 sm:px-6 flex items-center gap-3 border-b border-slate-200 dark:border-white/10 bg-white/80 dark:bg-slate-900/80 backdrop-blur">
+                <button onclick="admToggleSidebar(true)" class="md:hidden w-9 h-9 rounded-lg border border-slate-200 dark:border-white/10 flex items-center justify-center" id="adm-menu-btn"></button>
+                <div class="min-w-0">
+                    <div class="text-[11px] text-slate-500 dark:text-gray-400">Original CMS / <span id="adm-crumb"></span></div>
+                    <h2 id="adm-workspace-title" class="font-semibold text-base truncate"></h2>
                 </div>
-                <div class="flex items-center gap-2.5">
-                    <button onclick="openAdminInStandaloneTab()" class="px-3.5 py-2 rounded-xl bg-slate-900/5 dark:bg-white/5 hover:bg-slate-900/10 dark:hover:bg-white/10 border border-slate-200 dark:border-white/15 text-xs font-bold text-slate-700 dark:text-gray-200 flex items-center gap-1.5">
-                        <span>Yangi oynada ochish</span>
-                        <span>↗</span>
-                    </button>
-                    <button onclick="closeAdminDashboard()" class="px-4 py-2 rounded-xl bg-brand-gold text-brand-obsidian font-display font-extrabold text-xs">
-                        Saytni ko‘rish →
-                    </button>
-                </div>
-            </div>
-
-            <div class="p-6 overflow-y-auto flex-1 space-y-6">
-                <!-- PANEL 1: TEACHERS -->
-                <div id="adm-panel-teachers" class="adm-panel grid grid-cols-1 lg:grid-cols-12 gap-6">
-                    <form onsubmit="adminAddTeacher(event)" class="lg:col-span-5 p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 space-y-3.5 self-start shadow-sm">
-                        <h4 class="font-display font-extrabold text-base text-slate-900 dark:text-white">+ Yangi ustoz qo‘shish</h4>
-                        <input type="text" id="t-add-name" required placeholder="Ism va familiya (masalan: SARDORBEK KARIMOV)" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-900 dark:text-white"/>
-                        <div class="grid grid-cols-2 gap-2.5">
-                            <input type="text" id="t-add-band" required placeholder="Daraja (IELTS 8.5 / C2)" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white"/>
-                            <input type="text" id="t-add-qual" required placeholder="Sertifikat (CELTA / TESOL)" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white"/>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2.5">
-                            <input type="text" id="t-add-exp" required placeholder="Tajriba (8 yil)" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white"/>
-                            <input type="text" id="t-add-students" required placeholder="O‘quvchilar (1200+)" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white"/>
-                        </div>
-                        <input type="text" id="t-add-desc" placeholder="Qisqa tavsif..." class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white"/>
-                        <input type="url" id="t-add-url" placeholder="Rasm URL manzili (ixtiyoriy)" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white"/>
-                        <div>
-                            <label class="text-[11px] text-slate-500 dark:text-gray-400 block mb-1">Yoki kompyuterdan rasm yuklang (3:4):</label>
-                            <input type="file" id="t-add-file" accept="image/*" class="text-xs text-slate-600 dark:text-gray-300"/>
-                        </div>
-                        <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-gold text-brand-obsidian font-display font-black text-xs">
-                            + Ustozni qo‘shish
-                        </button>
-                    </form>
-                    <div id="adm-teachers-list" class="lg:col-span-7 space-y-3"></div>
-                </div>
-
-                <!-- PANEL 2: RESULTS -->
-                <div id="adm-panel-results" class="adm-panel hidden grid-cols-1 lg:grid-cols-12 gap-6">
-                    <form onsubmit="adminAddResult(event)" class="lg:col-span-5 p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 space-y-3.5 self-start shadow-sm">
-                        <h4 class="font-display font-extrabold text-base text-slate-900 dark:text-white">+ Yangi IELTS / CEFR natija qo‘shish</h4>
-                        <input type="text" id="r-add-name" required placeholder="O‘quvchi ism-familiyasi" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-900 dark:text-white"/>
-                        <div class="grid grid-cols-5 gap-2">
-                            <input type="text" id="r-add-overall" required placeholder="Overall (8.5)" class="col-span-1 px-2.5 py-2.5 rounded-xl bg-amber-500/20 border border-amber-500/40 text-xs font-black text-center text-brand-gold"/>
-                            <input type="text" id="r-add-l" required placeholder="L (9.0)" class="px-2.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-center text-slate-900 dark:text-white"/>
-                            <input type="text" id="r-add-r" required placeholder="R (8.5)" class="px-2.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-center text-slate-900 dark:text-white"/>
-                            <input type="text" id="r-add-w" required placeholder="W (7.5)" class="px-2.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-center text-slate-900 dark:text-white"/>
-                            <input type="text" id="r-add-s" required placeholder="S (8.5)" class="px-2.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-center text-slate-900 dark:text-white"/>
-                        </div>
-                        <input type="url" id="r-add-url" placeholder="Sertifikat rasmi URL" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white"/>
-                        <div>
-                            <label class="text-[11px] text-slate-500 dark:text-gray-400 block mb-1">Yoki sertifikat skrinshotini yuklang:</label>
-                            <input type="file" id="r-add-file" accept="image/*" class="text-xs text-slate-600 dark:text-gray-300"/>
-                        </div>
-                        <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-gold text-brand-obsidian font-display font-black text-xs">
-                            + Natijani qo‘shish
-                        </button>
-                    </form>
-                    <div id="adm-results-list" class="lg:col-span-7 space-y-3"></div>
-                </div>
-
-                <!-- PANEL 3: COURSES & PRICING -->
-                <div id="adm-panel-courses" class="adm-panel hidden grid-cols-1 lg:grid-cols-12 gap-6">
-                    <form onsubmit="adminAddCourse(event)" class="lg:col-span-4 p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 space-y-3.5 self-start shadow-sm">
-                        <h4 class="font-display font-extrabold text-base text-slate-900 dark:text-white">+ Yangi kurs qo‘shish</h4>
-                        <div class="grid grid-cols-2 gap-2">
-                            <input type="text" id="c-add-code" required placeholder="Kod (masalan: KOR)" class="px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-900 dark:text-white"/>
-                            <select id="c-add-cat" class="px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-900 dark:text-white">
-                                <option value="lang">Xorijiy tillar</option>
-                                <option value="math">Matematika va mantiq</option>
-                            </select>
-                        </div>
-                        <input type="text" id="c-add-title" required placeholder="Kurs nomi" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-900 dark:text-white"/>
-                        <input type="text" id="c-add-price" required placeholder="Narxi (590 000 so‘m / oy)" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white"/>
-                        <div class="grid grid-cols-2 gap-2">
-                            <input type="text" id="c-add-days" required placeholder="Haftada 3 kun" class="px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white"/>
-                            <input type="text" id="c-add-dur" required placeholder="90 daqiqa" class="px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white"/>
-                        </div>
-                        <input type="text" id="c-add-desc" required placeholder="Qisqa tavsif..." class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white"/>
-                        <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-gold text-brand-obsidian font-display font-black text-xs">
-                            + Kursni qo‘shish
-                        </button>
-                    </form>
-                    <div id="adm-courses-list" class="lg:col-span-8 space-y-3"></div>
-                </div>
-
-                <!-- PANEL 4: PARTNERS -->
-                <div id="adm-panel-partners" class="adm-panel hidden grid-cols-1 lg:grid-cols-12 gap-6">
-                    <form onsubmit="adminAddPartner(event)" class="lg:col-span-5 p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 space-y-3.5 self-start shadow-sm">
-                        <h4 class="font-display font-extrabold text-base text-slate-900 dark:text-white">+ Hamkor logotipini qo‘shish</h4>
-                        <input type="url" id="p-add-url" placeholder="Logotip URL manzili" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white"/>
-                        <div>
-                            <label class="text-[11px] text-slate-500 dark:text-gray-400 block mb-1">Yoki logotip faylini yuklang (PNG/SVG):</label>
-                            <input type="file" id="p-add-file" accept="image/*" class="text-xs text-slate-600 dark:text-gray-300"/>
-                        </div>
-                        <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-gold text-brand-obsidian font-display font-black text-xs">
-                            + Logotipni qo‘shish
-                        </button>
-                    </form>
-                    <div id="adm-partners-list" class="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
-                </div>
-
-                <!-- PANEL 5: BRANCHES & TELEGRAM -->
-                <div id="adm-panel-branches" class="adm-panel hidden grid-cols-1 lg:grid-cols-12 gap-6">
-                    <div class="lg:col-span-5 space-y-4">
-                        <form onsubmit="adminAddBranch(event)" class="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 space-y-3 shadow-sm">
-                            <h4 class="font-display font-extrabold text-base text-slate-900 dark:text-white">+ Yangi filial manzili qo‘shish</h4>
-                            <input type="text" id="b-add-title" required placeholder="Filial nomi" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-900 dark:text-white"/>
-                            <input type="text" id="b-add-address" required placeholder="To‘liq manzil" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white"/>
-                            <input type="text" id="b-add-landmark" required placeholder="Mo‘ljal va ish vaqti" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white"/>
-                            <input type="text" id="b-add-coords" required value="41.169750,69.221655" placeholder="Koordinata (41.169750,69.221655)" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-mono text-slate-900 dark:text-white"/>
-                            <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-gold text-brand-obsidian font-display font-black text-xs">
-                                + Filialni qo‘shish
-                            </button>
-                        </form>
-
-                        <div class="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 space-y-3 shadow-sm">
-                            <h4 class="font-display font-extrabold text-base text-slate-900 dark:text-white">🤖 Telegram Bot qabul qiluvchi ID'lar</h4>
-                            <input type="text" id="adm-tg-ids" value="8410825829, 36430421" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-mono text-slate-900 dark:text-white"/>
-                            <button type="button" onclick="saveTelegramIdsFromAdmin()" class="w-full py-3 rounded-xl bg-emerald-500 text-white font-display font-extrabold text-xs">
-                                ID'larni saqlash ✓
-                            </button>
-                            <span id="adm-tg-saved" class="hidden text-xs font-bold text-emerald-500 dark:text-emerald-400 block text-center">✅ Saqlandi!</span>
-                        </div>
-                    </div>
-
-                    <div id="adm-branches-list" class="lg:col-span-7 space-y-3"></div>
-                </div>
-            </div>
+                <div class="ml-auto flex items-center gap-2" id="adm-header-actions"></div>
+            </header>
+            <div id="adm-content" class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8"></div>
         </main>
+
+        <!-- Add / edit drawer -->
+        <div id="adm-drawer" class="hidden fixed inset-0 z-40">
+            <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onclick="admCloseDrawer()"></div>
+            <form id="adm-form" onsubmit="admSubmitForm(event)" novalidate class="adm-slide absolute right-0 inset-y-0 w-full max-w-lg bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-white/10 shadow-2xl flex flex-col">
+                <div class="h-16 px-5 flex items-center justify-between border-b border-slate-200 dark:border-white/10">
+                    <h3 id="adm-drawer-title" class="font-semibold"></h3>
+                    <button type="button" onclick="admCloseDrawer()" class="w-8 h-8 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 flex items-center justify-center">✕</button>
+                </div>
+                <div id="adm-form-body" class="flex-1 overflow-y-auto p-5 grid grid-cols-12 gap-4 content-start"></div>
+                <div class="p-4 border-t border-slate-200 dark:border-white/10 flex justify-end gap-2">
+                    <button type="button" onclick="admCloseDrawer()" class="px-4 py-2 rounded-lg border border-slate-200 dark:border-white/10 text-sm font-semibold hover:bg-slate-50 dark:hover:bg-white/5">Bekor qilish</button>
+                    <button type="submit" class="px-4 py-2 rounded-lg bg-brand-gold text-brand-obsidian text-sm font-bold hover:brightness-95">Saqlash</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Confirm dialog -->
+        <div id="adm-confirm" class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
+            <div class="w-full max-w-sm rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 p-5 shadow-2xl">
+                <h4 class="font-semibold">Ishonchingiz komilmi?</h4>
+                <p id="adm-confirm-text" class="text-sm text-slate-500 dark:text-gray-400 mt-1"></p>
+                <div class="flex justify-end gap-2 mt-5">
+                    <button onclick="admCloseConfirm()" class="px-4 py-2 rounded-lg border border-slate-200 dark:border-white/10 text-sm font-semibold hover:bg-slate-50 dark:hover:bg-white/5">Bekor qilish</button>
+                    <button id="adm-confirm-ok" class="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white text-sm font-semibold">Ha, davom etish</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="adm-toasts" class="fixed bottom-4 right-4 z-[60] space-y-2"></div>
     </div>
 
     <!-- ===================================================================== -->
@@ -1372,7 +1238,7 @@
                         id: "t1",
                         name: "SHOHRUHBEK KARIMOV",
                         band: "IELTS 9.0",
-                        qualification: "CELTAPass A",
+                        qualification: "CELTA Pass A",
                         experience: "9 yil",
                         students: "2,400+",
                         desc: "IELTS Academic Writing va Speaking bo‘yicha bosh ekspert, xalqaro CELTA sertifikati sohibi.",
@@ -1385,7 +1251,7 @@
                         qualification: "TESOL / C2",
                         experience: "7 yil",
                         students: "1,850+",
-                        desc: "General English va Intensive IELTS Reading/Listening yo‘nalishi ustozi, 400+ shogirdi 7.5+ olgan.",
+                        desc: "General English va Intensive IELTS Reading/Listening yo‘nalishi ustozi, 400+ shogirdi 7.5+ ball olgan.",
                         photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=700&q=80"
                     },
                     {
@@ -2025,11 +1891,6 @@
             modal.classList.remove('flex');
         }
 
-        function fillDemoLogin() {
-            document.getElementById('admin-login-input').value = 'admin';
-            document.getElementById('admin-pass-input').value = 'admin123';
-        }
-
         function handleAdminLogin(e) {
             e.preventDefault();
             const login = document.getElementById('admin-login-input').value.trim();
@@ -2074,36 +1935,355 @@
             window.open(url.toString(), '_blank');
         }
 
-        function switchAdminTab(tabName) {
-            const titles = {
-                teachers: '👨‍🏫 Ustozlar boshqaruvi',
-                results: '🏆 Natijalar (IELTS TRF)',
-                courses: '📚 Kurslar va Narxlar',
-                partners: '🤝 Hamkor logotiplari',
-                branches: '📍 Manzil va Telegram Bot'
-            };
-            const titleEl = document.getElementById('adm-workspace-title');
-            if (titleEl && titles[tabName]) {
-                titleEl.textContent = titles[tabName];
-            }
+        // ---------------- ADMIN PANEL (schema-driven CRUD) ----------------
+        const ADM_ICONS = {
+            home: 'M3 12l9-9 9 9M5 10v10h14V10',
+            users: 'M17 20h5v-2a4 4 0 00-5-3.87M9 20H2v-2a4 4 0 015-3.87m6-4.13a4 4 0 11-8 0 4 4 0 018 0zm6 2a3 3 0 11-6 0 3 3 0 016 0z',
+            trophy: 'M8 21h8M12 17v4M7 4h10v5a5 5 0 01-10 0V4zM17 5h3v2a3 3 0 01-3 3M7 5H4v2a3 3 0 003 3',
+            book: 'M12 6.25C10.5 5 8 4.5 4 4.5v14c4 0 6.5.5 8 1.75 1.5-1.25 4-1.75 8-1.75v-14c-4 0-6.5.5-8 1.75zM12 6.25v14',
+            building: 'M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6',
+            pin: 'M12 21s-7-6.5-7-12a7 7 0 0114 0c0 5.5-7 12-7 12zm0-9a3 3 0 100-6 3 3 0 000 6z',
+            cog: 'M10.3 4.3a1.7 1.7 0 013.4 0 1.7 1.7 0 002.6 1.1 1.7 1.7 0 012.4 2.4 1.7 1.7 0 001.1 2.6 1.7 1.7 0 010 3.4 1.7 1.7 0 00-1.1 2.6 1.7 1.7 0 01-2.4 2.4 1.7 1.7 0 00-2.6 1.1 1.7 1.7 0 01-3.4 0 1.7 1.7 0 00-2.6-1.1 1.7 1.7 0 01-2.4-2.4 1.7 1.7 0 00-1.1-2.6 1.7 1.7 0 010-3.4 1.7 1.7 0 001.1-2.6 1.7 1.7 0 012.4-2.4 1.7 1.7 0 002.6-1.1zM12 15a3 3 0 100-6 3 3 0 000 6z',
+            plus: 'M12 5v14M5 12h14',
+            edit: 'M4 20h4L18.5 9.5a2.1 2.1 0 00-3-3L5 17v3z',
+            trash: 'M4 7h16M10 11v6M14 11v6M5 7l1 13h12l1-13M9 7V4h6v3',
+            search: 'M21 21l-4.3-4.3M17 10a7 7 0 11-14 0 7 7 0 0114 0z',
+            up: 'M12 19V5M5 12l7-7 7 7',
+            down: 'M12 5v14M19 12l-7 7-7-7',
+            menu: 'M4 6h16M4 12h16M4 18h16',
+            ext: 'M14 4h6v6M20 4l-9 9M18 14v6H4V6h6',
+            logout: 'M15 12H3m0 0l4-4m-4 4l4 4M13 4h6a2 2 0 012 2v12a2 2 0 01-2 2h-6',
+            moon: 'M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z',
+            download: 'M12 4v12m0 0l-4-4m4 4l4-4M4 20h16',
+            upload: 'M12 16V4m0 0L8 8m4-4l4 4M4 20h16'
+        };
+        const admIcon = (name, cls = 'w-4 h-4') => `<svg class="${cls}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="${ADM_ICONS[name]}"/></svg>`;
+        const admEsc = (v) => String(v ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+        const admBadge = (v) => v ? `<span class="inline-flex px-2 py-0.5 rounded-md bg-brand-gold/15 text-amber-700 dark:text-brand-gold text-xs font-semibold">${admEsc(v)}</span>` : '<span class="text-slate-400">—</span>';
 
-            document.querySelectorAll('.adm-panel').forEach(p => {
-                p.classList.add('hidden');
-                p.classList.remove('grid');
-            });
-            const activePanel = document.getElementById(`adm-panel-${tabName}`);
-            if (activePanel) {
-                activePanel.classList.remove('hidden');
-                activePanel.classList.add('grid');
-            }
+        const ADM_BTN = 'inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-sm font-semibold transition-colors';
+        const ADM_BTN_PRIMARY = `${ADM_BTN} bg-brand-gold text-brand-obsidian hover:brightness-95`;
+        const ADM_BTN_GHOST = `${ADM_BTN} border border-slate-200 dark:border-white/10 text-slate-700 dark:text-gray-200 hover:bg-slate-50 dark:hover:bg-white/5`;
+        const ADM_INPUT = 'w-full px-3 py-2 rounded-lg bg-white dark:bg-slate-950 border border-slate-300 dark:border-white/15 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-gold/40 focus:border-brand-gold';
+        const ADM_CARD = 'rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 shadow-sm';
+        const COURSE_CATEGORIES = { lang: 'Xorijiy tillar', math: 'Matematika va mantiq' };
 
-            document.querySelectorAll('.adm-tab-btn').forEach(btn => {
-                btn.className = 'adm-tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs sm:text-sm font-bold text-slate-600 dark:text-gray-300 hover:bg-slate-900/5 dark:hover:bg-white/5 transition-all shrink-0 text-left';
-            });
-            const activeBtn = document.getElementById(`adm-tab-${tabName}`);
-            if (activeBtn) {
-                activeBtn.className = 'adm-tab-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs sm:text-sm font-extrabold bg-brand-gold text-brand-obsidian transition-all shrink-0 text-left';
+        const ADM_SCHEMA = {
+            teachers: {
+                label: 'Ustozlar', addTitle: 'Yangi ustoz qo‘shish', editTitle: 'Ustozni tahrirlash', icon: 'users', prefix: 't_', insert: 'start',
+                search: ['name', 'band', 'qualification', 'desc'],
+                fields: [
+                    { key: 'name', label: 'Ism va familiya', required: true, upper: true, placeholder: 'SARDORBEK KARIMOV' },
+                    { key: 'band', label: 'Daraja', required: true, placeholder: 'IELTS 8.5 / C2', w: 6 },
+                    { key: 'qualification', label: 'Sertifikat', placeholder: 'CELTA / TESOL', w: 6 },
+                    { key: 'experience', label: 'Tajriba', placeholder: '8 yil', w: 6 },
+                    { key: 'students', label: 'O‘quvchilar soni', placeholder: '1 200+', w: 6 },
+                    { key: 'desc', label: 'Qisqa tavsif', type: 'textarea' },
+                    { key: 'photo', label: 'Rasm', type: 'image', hint: 'Tavsiya etilgan nisbat — 3:4', fallback: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=80' }
+                ],
+                columns: [
+                    { label: 'Ustoz', render: t => `<div class="flex items-center gap-3"><img src="${admEsc(t.photo)}" alt="" class="w-9 h-11 rounded-md object-cover bg-slate-200 dark:bg-white/10 shrink-0"/><div class="min-w-0"><div class="font-semibold text-slate-900 dark:text-white">${admEsc(t.name)}</div><div class="text-xs text-slate-500 dark:text-gray-400 truncate max-w-xs">${admEsc(t.desc)}</div></div></div>` },
+                    { label: 'Daraja', render: t => admBadge(t.band) },
+                    { label: 'Sertifikat', render: t => admEsc(t.qualification) },
+                    { label: 'Tajriba', render: t => admEsc(t.experience) },
+                    { label: 'O‘quvchilar', render: t => admEsc(t.students) }
+                ]
+            },
+            results: {
+                label: 'Natijalar', addTitle: 'Yangi natija qo‘shish', editTitle: 'Natijani tahrirlash', icon: 'trophy', prefix: 'r_', insert: 'start',
+                search: ['name', 'overall'],
+                onCreate: r => { if (!r.trf) r.trf = String(Math.floor(100000 + Math.random() * 900000)); },
+                fields: [
+                    { key: 'name', label: 'O‘quvchi ism-familiyasi', required: true },
+                    { key: 'overall', label: 'Overall', required: true, placeholder: '8.5', w: 4 },
+                    { key: 'trf', label: 'TRF raqami', placeholder: 'Avtomatik', w: 8 },
+                    { key: 'l', label: 'Listening', required: true, placeholder: '9.0', w: 3 },
+                    { key: 'r', label: 'Reading', required: true, placeholder: '8.5', w: 3 },
+                    { key: 'w', label: 'Writing', required: true, placeholder: '7.5', w: 3 },
+                    { key: 's', label: 'Speaking', required: true, placeholder: '8.5', w: 3 },
+                    { key: 'image', label: 'Sertifikat rasmi', type: 'image', hint: 'Bo‘sh qoldirilsa, sertifikat avtomatik yaratiladi' }
+                ],
+                columns: [
+                    { label: 'O‘quvchi', render: r => `<span class="font-semibold text-slate-900 dark:text-white">${admEsc(r.name)}</span>` },
+                    { label: 'Overall', render: r => admBadge(r.overall) },
+                    { label: 'L / R / W / S', render: r => `<span class="font-mono text-xs">${admEsc(r.l)} / ${admEsc(r.r)} / ${admEsc(r.w)} / ${admEsc(r.s)}</span>` },
+                    { label: 'Sertifikat', render: r => r.image ? `<img src="${admEsc(r.image)}" alt="" class="h-10 w-14 rounded object-cover border border-slate-200 dark:border-white/10"/>` : '<span class="text-xs text-slate-400">Avtomatik</span>' }
+                ]
+            },
+            courses: {
+                label: 'Kurslar va narxlar', addTitle: 'Yangi kurs qo‘shish', editTitle: 'Kursni tahrirlash', icon: 'book', prefix: 'c_', insert: 'end',
+                search: ['title', 'code', 'price', 'desc'],
+                fields: [
+                    { key: 'code', label: 'Kod', required: true, upper: true, placeholder: 'KOR', w: 4 },
+                    { key: 'category', label: 'Yo‘nalish', type: 'select', options: COURSE_CATEGORIES, w: 8 },
+                    { key: 'title', label: 'Kurs nomi', required: true },
+                    { key: 'tag', label: 'Belgi', placeholder: 'Eng ommabop', w: 6 },
+                    { key: 'price', label: 'Oylik to‘lov', required: true, placeholder: '590 000 so‘m / oy', w: 6 },
+                    { key: 'days', label: 'Haftalik darslar', placeholder: 'Haftada 3 kun', w: 6 },
+                    { key: 'duration', label: 'Dars davomiyligi', placeholder: '90 daqiqa', w: 6 },
+                    { key: 'desc', label: 'Qisqa tavsif', type: 'textarea', required: true }
+                ],
+                columns: [
+                    { label: 'Kurs', render: c => `<div class="flex items-center gap-3"><span class="w-9 h-9 rounded-lg bg-brand-gold/15 text-amber-700 dark:text-brand-gold font-bold text-xs flex items-center justify-center shrink-0">${admEsc(c.code)}</span><div class="min-w-0"><div class="font-semibold text-slate-900 dark:text-white">${admEsc(c.title)}</div><div class="text-xs text-slate-500 dark:text-gray-400 truncate max-w-xs">${admEsc(c.desc)}</div></div></div>` },
+                    { label: 'Yo‘nalish', render: c => admEsc(COURSE_CATEGORIES[c.category] || c.category) },
+                    { label: 'Narx', render: c => `<span class="font-semibold whitespace-nowrap">${admEsc(c.price)}</span>` },
+                    { label: 'Jadval', render: c => `<span class="text-xs whitespace-nowrap">${admEsc(c.days)} • ${admEsc(c.duration)}</span>` }
+                ]
+            },
+            partners: {
+                label: 'Hamkorlar', addTitle: 'Yangi hamkor qo‘shish', editTitle: 'Hamkorni tahrirlash', icon: 'building', prefix: 'p_', insert: 'end',
+                search: ['name'],
+                fields: [
+                    { key: 'name', label: 'Hamkor nomi', placeholder: 'British Council' },
+                    { key: 'image', label: 'Logotip', type: 'image', required: true, hint: 'PNG yoki SVG, shaffof fon tavsiya etiladi' }
+                ],
+                columns: [
+                    { label: 'Logotip', render: p => `<div class="h-10 w-28 flex items-center text-slate-900 dark:text-white [&_svg]:max-h-10 [&_svg]:w-auto">${p.image ? `<img src="${admEsc(p.image)}" alt="" class="max-h-10 w-auto object-contain"/>` : (p.svg || '')}</div>` },
+                    { label: 'Nomi', render: p => p.name ? admEsc(p.name) : '<span class="text-slate-400">—</span>' }
+                ]
+            },
+            branches: {
+                label: 'Filiallar', addTitle: 'Yangi filial qo‘shish', editTitle: 'Filialni tahrirlash', icon: 'pin', prefix: 'b_', insert: 'start', minItems: 1,
+                search: ['title', 'address', 'landmark'],
+                fields: [
+                    { key: 'title', label: 'Filial nomi', required: true },
+                    { key: 'address', label: 'To‘liq manzil', required: true },
+                    { key: 'landmark', label: 'Mo‘ljal va ish vaqti', placeholder: 'Mo‘ljal: ... • Du–Sha: 08:00 – 20:00' },
+                    { key: 'coords', label: 'Koordinatalar', required: true, placeholder: '41.169750,69.221655', pattern: '^-?\\d+(\\.\\d+)?,\\s*-?\\d+(\\.\\d+)?$', hint: 'Format: kenglik,uzunlik' }
+                ],
+                columns: [
+                    { label: 'Filial', render: b => `<div class="font-semibold text-slate-900 dark:text-white">${admEsc(b.title)}</div><div class="text-xs text-slate-500 dark:text-gray-400">${admEsc(b.address)}</div>` },
+                    { label: 'Mo‘ljal', render: b => `<span class="text-xs">${admEsc(b.landmark)}</span>` },
+                    { label: 'Koordinata', render: b => `<a href="https://www.google.com/maps?q=${encodeURIComponent(b.coords)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="font-mono text-xs text-amber-700 dark:text-brand-gold hover:underline">${admEsc(b.coords)}</a>` }
+                ]
             }
+        };
+
+        const ADM_NAV = [
+            { group: 'Umumiy', items: [{ tab: 'dashboard', label: 'Bosh panel', icon: 'home' }] },
+            { group: 'Kontent', items: ['teachers', 'results', 'courses', 'partners', 'branches'].map(k => ({ tab: k, label: ADM_SCHEMA[k].label, icon: ADM_SCHEMA[k].icon })) },
+            { group: 'Tizim', items: [{ tab: 'settings', label: 'Sozlamalar', icon: 'cog' }] }
+        ];
+        const admState = { tab: 'dashboard', query: '', navQuery: '', editing: null, confirmAction: null };
+
+        function admTabLabel(tab) {
+            return ADM_NAV.flatMap(g => g.items).find(i => i.tab === tab)?.label || '';
+        }
+
+        function admRenderNav() {
+            const q = admState.navQuery.toLowerCase();
+            document.getElementById('adm-nav').innerHTML = ADM_NAV.map(g => {
+                const items = g.items.filter(i => i.label.toLowerCase().includes(q));
+                if (!items.length) return '';
+                return `<div>
+                    <div class="px-3 mb-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400">${g.group}</div>
+                    ${items.map(i => {
+                        const active = i.tab === admState.tab;
+                        const count = cmsData[i.tab] ? `<span class="ml-auto text-[11px] px-1.5 rounded ${active ? 'bg-brand-gold/25' : 'bg-slate-100 dark:bg-white/10 text-slate-500'}">${cmsData[i.tab].length}</span>` : '';
+                        return `<button onclick="switchAdminTab('${i.tab}')" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${active ? 'bg-brand-gold/15 text-amber-700 dark:text-brand-gold font-semibold' : 'text-slate-600 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-white/5'}">${admIcon(i.icon)}<span>${i.label}</span>${count}</button>`;
+                    }).join('')}
+                </div>`;
+            }).join('');
+        }
+
+        function admFilterNav(value) {
+            admState.navQuery = value;
+            admRenderNav();
+        }
+
+        function admToggleSidebar(open) {
+            document.getElementById('adm-sidebar').classList.toggle('-translate-x-full', !open);
+            document.getElementById('adm-sidebar-backdrop').classList.toggle('hidden', !open);
+        }
+
+        function switchAdminTab(tab) {
+            admState.tab = tab;
+            admState.query = '';
+            const label = admTabLabel(tab);
+            document.getElementById('adm-workspace-title').textContent = label;
+            document.getElementById('adm-crumb').textContent = label;
+            admRenderNav();
+            admToggleSidebar(false);
+            const content = document.getElementById('adm-content');
+            content.scrollTop = 0;
+            if (tab === 'dashboard') admRenderDashboard();
+            else if (tab === 'settings') admRenderSettings();
+            else admRenderCollection(tab);
+        }
+
+        function renderAdminLists() {
+            document.getElementById('adm-logout-btn').innerHTML = admIcon('logout');
+            document.getElementById('adm-menu-btn').innerHTML = admIcon('menu');
+            document.getElementById('adm-header-actions').innerHTML = `
+                <button onclick="toggleTheme()" title="Mavzuni almashtirish" class="${ADM_BTN_GHOST} !px-2.5">${admIcon('moon')}</button>
+                <button onclick="openAdminInStandaloneTab()" class="${ADM_BTN_GHOST} hidden sm:inline-flex">${admIcon('ext')}<span>Yangi oyna</span></button>
+                <button onclick="closeAdminDashboard()" class="${ADM_BTN_PRIMARY}">Saytni ko‘rish</button>`;
+            switchAdminTab(admState.tab);
+        }
+
+        // ---- Dashboard ----
+        function admRenderDashboard() {
+            const best = Math.max(0, ...cmsData.results.map(r => parseFloat(r.overall) || 0));
+            const stats = [
+                { tab: 'teachers', hint: 'Faol ustozlar' },
+                { tab: 'results', hint: best ? `Eng yuqori: ${best.toFixed(1)}` : 'Hali natija yo‘q' },
+                { tab: 'courses', hint: 'Ochiq kurslar' },
+                { tab: 'branches', hint: 'Faol filiallar' }
+            ];
+            document.getElementById('adm-content').innerHTML = `
+                <div class="mb-6">
+                    <h1 class="text-xl font-semibold">Xush kelibsiz, admin 👋</h1>
+                    <p class="text-sm text-slate-500 dark:text-gray-400">Barcha o‘zgarishlar darhol saqlanadi va asosiy sahifada aks etadi.</p>
+                </div>
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    ${stats.map(s => `
+                        <button onclick="switchAdminTab('${s.tab}')" class="${ADM_CARD} p-5 text-left hover:border-brand-gold/60 transition-colors">
+                            <div class="flex items-center justify-between text-slate-500 dark:text-gray-400">
+                                <span class="text-sm font-medium">${ADM_SCHEMA[s.tab].label}</span>
+                                <span class="w-8 h-8 rounded-lg bg-brand-gold/15 text-amber-700 dark:text-brand-gold flex items-center justify-center">${admIcon(ADM_SCHEMA[s.tab].icon)}</span>
+                            </div>
+                            <div class="text-3xl font-semibold mt-2">${cmsData[s.tab].length}</div>
+                            <div class="text-xs text-slate-500 dark:text-gray-400 mt-1">${s.hint}</div>
+                        </button>`).join('')}
+                </div>
+                <div class="${ADM_CARD} p-4 mb-6 flex flex-wrap items-center gap-2">
+                    <span class="text-sm font-semibold mr-2">Tezkor amallar:</span>
+                    ${['teachers', 'results', 'courses', 'partners', 'branches'].map(k => `<button onclick="admOpenForm('${k}')" class="${ADM_BTN_GHOST}">${admIcon('plus')}${ADM_SCHEMA[k].addTitle.replace('Yangi ', '').replace(' qo‘shish', '')}</button>`).join('')}
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="${ADM_CARD}">
+                        <div class="px-5 py-4 border-b border-slate-200 dark:border-white/10 flex justify-between items-center">
+                            <h3 class="font-semibold text-sm">So‘nggi natijalar</h3>
+                            <button onclick="switchAdminTab('results')" class="text-xs font-semibold text-amber-700 dark:text-brand-gold hover:underline">Barchasi →</button>
+                        </div>
+                        <ul class="divide-y divide-slate-100 dark:divide-white/5">
+                            ${cmsData.results.slice(0, 5).map(r => `<li class="px-5 py-3 flex items-center justify-between text-sm"><span>${admEsc(r.name)}</span>${admBadge(r.overall)}</li>`).join('') || '<li class="px-5 py-6 text-sm text-slate-400 text-center">Ma’lumot yo‘q</li>'}
+                        </ul>
+                    </div>
+                    <div class="${ADM_CARD}">
+                        <div class="px-5 py-4 border-b border-slate-200 dark:border-white/10 flex justify-between items-center">
+                            <h3 class="font-semibold text-sm">Kurs narxlari</h3>
+                            <button onclick="switchAdminTab('courses')" class="text-xs font-semibold text-amber-700 dark:text-brand-gold hover:underline">Barchasi →</button>
+                        </div>
+                        <ul class="divide-y divide-slate-100 dark:divide-white/5">
+                            ${cmsData.courses.map(c => `<li class="px-5 py-3 flex items-center justify-between gap-3 text-sm"><span class="truncate">${admEsc(c.title)}</span><span class="font-semibold whitespace-nowrap">${admEsc(c.price)}</span></li>`).join('') || '<li class="px-5 py-6 text-sm text-slate-400 text-center">Ma’lumot yo‘q</li>'}
+                        </ul>
+                    </div>
+                </div>`;
+        }
+
+        // ---- Collection list ----
+        function admRenderCollection(type) {
+            const s = ADM_SCHEMA[type];
+            document.getElementById('adm-content').innerHTML = `
+                <div class="flex flex-wrap items-end justify-between gap-3 mb-5">
+                    <div>
+                        <h1 class="text-xl font-semibold">${s.label}</h1>
+                        <p id="adm-count" class="text-sm text-slate-500 dark:text-gray-400"></p>
+                    </div>
+                    <div class="flex gap-2 w-full sm:w-auto">
+                        <div class="relative flex-1 sm:w-64">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">${admIcon('search')}</span>
+                            <input type="search" value="${admEsc(admState.query)}" oninput="admState.query=this.value; admRenderRows()" placeholder="Qidirish..." class="${ADM_INPUT} pl-9"/>
+                        </div>
+                        <button onclick="admOpenForm('${type}')" class="${ADM_BTN_PRIMARY} shrink-0">${admIcon('plus')}<span>Qo‘shish</span></button>
+                    </div>
+                </div>
+                <div class="${ADM_CARD} overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead class="bg-slate-50 dark:bg-white/[0.03] text-left text-[11px] uppercase tracking-wider text-slate-500 dark:text-gray-400">
+                                <tr>
+                                    <th class="w-12 px-4 py-3 font-semibold">#</th>
+                                    ${s.columns.map(c => `<th class="px-4 py-3 font-semibold whitespace-nowrap">${c.label}</th>`).join('')}
+                                    <th class="px-4 py-3 font-semibold text-right">Amallar</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adm-rows" class="divide-y divide-slate-100 dark:divide-white/5"></tbody>
+                        </table>
+                    </div>
+                </div>`;
+            admRenderRows();
+        }
+
+        function admRenderRows() {
+            const type = admState.tab;
+            const s = ADM_SCHEMA[type];
+            const list = cmsData[type];
+            const q = admState.query.trim().toLowerCase();
+            const rows = list.map((item, idx) => ({ item, idx }))
+                .filter(({ item }) => !q || s.search.some(k => String(item[k] || '').toLowerCase().includes(q)));
+            document.getElementById('adm-count').textContent = q ? `${rows.length} / ${list.length} ta yozuv topildi` : `Jami ${list.length} ta yozuv`;
+            const iconBtn = 'w-8 h-8 inline-flex items-center justify-center rounded-lg transition-colors disabled:opacity-30 disabled:pointer-events-none';
+            document.getElementById('adm-rows').innerHTML = rows.map(({ item, idx }) => `
+                <tr onclick="admOpenForm('${type}', ${idx})" class="cursor-pointer hover:bg-slate-50 dark:hover:bg-white/[0.03]">
+                    <td class="px-4 py-3 text-slate-400 text-xs">${idx + 1}</td>
+                    ${s.columns.map(c => `<td class="px-4 py-3 align-middle">${c.render(item)}</td>`).join('')}
+                    <td class="px-4 py-3 text-right whitespace-nowrap" onclick="event.stopPropagation()">
+                        <button onclick="admMove('${type}', ${idx}, -1)" ${idx === 0 ? 'disabled' : ''} title="Yuqoriga" class="${iconBtn} text-slate-500 hover:bg-slate-100 dark:hover:bg-white/10">${admIcon('up')}</button>
+                        <button onclick="admMove('${type}', ${idx}, 1)" ${idx === list.length - 1 ? 'disabled' : ''} title="Pastga" class="${iconBtn} text-slate-500 hover:bg-slate-100 dark:hover:bg-white/10">${admIcon('down')}</button>
+                        <button onclick="admOpenForm('${type}', ${idx})" title="Tahrirlash" class="${iconBtn} text-slate-500 hover:text-amber-700 dark:hover:text-brand-gold hover:bg-brand-gold/10">${admIcon('edit')}</button>
+                        <button onclick="admDelete('${type}', ${idx})" ${s.minItems && list.length <= s.minItems ? 'disabled' : ''} title="O‘chirish" class="${iconBtn} text-slate-500 hover:text-red-600 hover:bg-red-500/10">${admIcon('trash')}</button>
+                    </td>
+                </tr>`).join('') || `<tr><td colspan="${s.columns.length + 2}" class="px-4 py-12 text-center text-sm text-slate-400">${q ? 'Hech narsa topilmadi' : 'Hozircha yozuvlar yo‘q'}</td></tr>`;
+        }
+
+        function admPersist(message) {
+            saveCmsData();
+            admRenderNav();
+            if (ADM_SCHEMA[admState.tab]) admRenderRows();
+            else if (admState.tab === 'dashboard') admRenderDashboard();
+            if (message) admToast(message);
+        }
+
+        function admMove(type, idx, dir) {
+            const list = cmsData[type];
+            const to = idx + dir;
+            if (to < 0 || to >= list.length) return;
+            [list[idx], list[to]] = [list[to], list[idx]];
+            admPersist();
+        }
+
+        function admDelete(type, idx) {
+            const s = ADM_SCHEMA[type];
+            const item = cmsData[type][idx];
+            if (s.minItems && cmsData[type].length <= s.minItems) {
+                admToast('Kamida bitta yozuv qolishi kerak', 'error');
+                return;
+            }
+            const name = item.name || item.title || 'Ushbu yozuv';
+            admConfirm(`“${name}” butunlay o‘chiriladi. Bu amalni qaytarib bo‘lmaydi.`, () => {
+                cmsData[type].splice(idx, 1);
+                admPersist('Yozuv o‘chirildi');
+            });
+        }
+
+        // ---- Add / edit form ----
+        function admFieldHtml(f, value) {
+            const span = { 3: 'sm:col-span-3', 4: 'sm:col-span-4', 6: 'sm:col-span-6', 8: 'sm:col-span-8' }[f.w] || '';
+            const label = `<label class="block text-xs font-semibold text-slate-600 dark:text-gray-300 mb-1.5">${f.label}${f.required ? ' <span class="text-red-500">*</span>' : ''}</label>`;
+            const hint = f.hint ? `<p class="text-[11px] text-slate-400 mt-1">${f.hint}</p>` : '';
+            let control;
+            if (f.type === 'textarea') {
+                control = `<textarea name="${f.key}" rows="3" placeholder="${admEsc(f.placeholder || '')}" class="${ADM_INPUT}">${admEsc(value)}</textarea>`;
+            } else if (f.type === 'select') {
+                control = `<select name="${f.key}" class="${ADM_INPUT}">${Object.entries(f.options).map(([k, v]) => `<option value="${k}" ${k === value ? 'selected' : ''}>${v}</option>`).join('')}</select>`;
+            } else if (f.type === 'image') {
+                const isData = String(value || '').startsWith('data:');
+                control = `
+                    <div class="flex gap-3 items-start">
+                        <div class="w-20 h-20 rounded-lg border border-dashed border-slate-300 dark:border-white/15 bg-slate-50 dark:bg-white/5 flex items-center justify-center overflow-hidden shrink-0">
+                            <img id="adm-prev-${f.key}" src="${admEsc(value || '')}" alt="" class="max-w-full max-h-full object-contain ${value ? '' : 'hidden'}"/>
+                        </div>
+                        <div class="flex-1 space-y-2 min-w-0">
+                            <input type="url" name="${f.key}" value="${isData ? '' : admEsc(value)}" placeholder="${isData ? 'Yuklangan fayl saqlangan' : 'https://... rasm havolasi'}" oninput="admPreview('${f.key}', this.value)" class="${ADM_INPUT}"/>
+                            <input type="file" name="${f.key}__file" accept="image/*" onchange="admPreviewFile('${f.key}', this)" class="block w-full text-xs text-slate-500 file:mr-3 file:px-3 file:py-1.5 file:rounded-md file:border-0 file:bg-slate-100 dark:file:bg-white/10 file:text-xs file:font-semibold file:text-slate-700 dark:file:text-gray-200"/>
+                        </div>
+                    </div>`;
+            } else {
+                control = `<input type="text" name="${f.key}" value="${admEsc(value)}" placeholder="${admEsc(f.placeholder || '')}" class="${ADM_INPUT}"/>`;
+            }
+            return `<div class="col-span-12 ${span}">${label}${control}${hint}<p data-err="${f.key}" class="hidden text-[11px] text-red-500 mt-1"></p></div>`;
         }
 
         function readFileAsDataUrl(fileInput) {
@@ -2119,257 +2299,169 @@
             });
         }
 
-        function renderAdminLists() {
-            const tList = document.getElementById('adm-teachers-list');
-            if (tList) {
-                tList.innerHTML = cmsData.teachers.map(t => `
-                    <div class="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 flex items-center justify-between gap-3 shadow-sm">
-                        <div class="flex items-center gap-3 min-w-0">
-                            <img src="${t.photo}" class="w-12 h-14 rounded-xl object-cover shrink-0 bg-amber-400"/>
-                            <div class="min-w-0">
-                                <h5 class="font-display font-extrabold text-xs sm:text-sm text-slate-900 dark:text-white truncate">${t.name}</h5>
-                                <p class="text-[11px] text-brand-amber dark:text-brand-gold font-bold">${t.band} • ${t.qualification || 'Expert'} • ${t.experience}</p>
-                                <p class="text-[11px] text-slate-500 dark:text-gray-400 truncate">${t.desc || t.students}</p>
-                            </div>
-                        </div>
-                        <button onclick="adminDeleteTeacher('${t.id}')" class="px-3 py-1.5 rounded-xl bg-red-500/15 text-red-600 dark:text-red-400 hover:bg-red-500 hover:text-white text-xs font-bold shrink-0 transition-colors">
-                            O‘chirish
-                        </button>
-                    </div>
-                `).join('');
-            }
-
-            const rList = document.getElementById('adm-results-list');
-            if (rList) {
-                rList.innerHTML = cmsData.results.map(r => `
-                    <div class="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 flex items-center justify-between gap-3 shadow-sm">
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <span class="px-2 py-0.5 rounded-md bg-brand-gold text-brand-obsidian font-display font-black text-xs">OVERALL ${r.overall}</span>
-                                <h5 class="font-display font-extrabold text-xs sm:text-sm text-slate-900 dark:text-white">${r.name}</h5>
-                            </div>
-                            <p class="text-[11px] text-slate-500 dark:text-gray-400 mt-1 font-mono">
-                                L:${r.l} | R:${r.r} | W:${r.w} | S:${r.s}
-                            </p>
-                        </div>
-                        <button onclick="adminDeleteResult('${r.id}')" class="px-3 py-1.5 rounded-xl bg-red-500/15 text-red-600 dark:text-red-400 hover:bg-red-500 hover:text-white text-xs font-bold shrink-0 transition-colors">
-                            O‘chirish
-                        </button>
-                    </div>
-                `).join('');
-            }
-
-            const cList = document.getElementById('adm-courses-list');
-            if (cList) {
-                cList.innerHTML = cmsData.courses.map((c, idx) => `
-                    <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 space-y-3 shadow-sm">
-                        <div class="flex items-center justify-between gap-2">
-                            <div class="flex items-center gap-2.5 flex-1">
-                                <span class="w-8 h-8 rounded-lg bg-brand-gold text-brand-obsidian font-display font-extrabold text-xs flex items-center justify-center shrink-0">${c.code}</span>
-                                <input type="text" id="edit-c-title-${idx}" value="${c.title}" class="w-full font-display font-extrabold text-sm bg-transparent border-b border-transparent focus:border-brand-gold focus:outline-none text-slate-900 dark:text-white"/>
-                            </div>
-                            <button onclick="adminDeleteCourse('${c.id}')" class="px-2.5 py-1 rounded-lg bg-red-500/15 text-red-600 dark:text-red-400 hover:bg-red-500 hover:text-white text-xs font-bold shrink-0">
-                                O‘chirish
-                            </button>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                            <div>
-                                <label class="text-[10px] font-bold text-slate-500 dark:text-gray-400 block">Oylik to‘lov narxi</label>
-                                <input type="text" id="edit-c-price-${idx}" value="${c.price}" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-bold text-brand-amber dark:text-brand-gold"/>
-                            </div>
-                            <div>
-                                <label class="text-[10px] font-bold text-slate-500 dark:text-gray-400 block">Haftalik darslar</label>
-                                <input type="text" id="edit-c-days-${idx}" value="${c.days}" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white"/>
-                            </div>
-                            <div>
-                                <label class="text-[10px] font-bold text-slate-500 dark:text-gray-400 block">Dars davomiyligi</label>
-                                <input type="text" id="edit-c-dur-${idx}" value="${c.duration}" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white"/>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between gap-2 pt-1">
-                            <input type="text" id="edit-c-desc-${idx}" value="${c.desc}" class="flex-1 px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-900 dark:text-white"/>
-                            <button onclick="adminSaveCourseRow(${idx})" class="px-4 py-1.5 rounded-lg bg-emerald-500 text-white font-bold text-xs shrink-0 hover:bg-emerald-600 transition-colors">
-                                Saqlash ✓
-                            </button>
-                        </div>
-                    </div>
-                `).join('');
-            }
-
-            const pList = document.getElementById('adm-partners-list');
-            if (pList) {
-                pList.innerHTML = cmsData.partners.map((p, idx) => `
-                    <div class="p-3 rounded-2xl bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200 dark:border-white/10 flex flex-col items-center justify-between gap-2 shadow-sm">
-                        <div class="h-12 flex items-center justify-center overflow-hidden">
-                            ${p.image ? `<img src="${p.image}" class="max-h-10 w-auto object-contain"/>` : p.svg}
-                        </div>
-                        <button onclick="adminDeletePartner('${p.id}')" class="w-full py-1 rounded-lg bg-red-500/15 text-red-600 dark:text-red-400 hover:bg-red-500 hover:text-white text-[11px] font-bold transition-colors">
-                            O‘chirish (#${idx + 1})
-                        </button>
-                    </div>
-                `).join('');
-            }
-
-            const bList = document.getElementById('adm-branches-list');
-            if (bList) {
-                bList.innerHTML = cmsData.branches.map(b => `
-                    <div class="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 flex items-center justify-between gap-3 shadow-sm">
-                        <div class="min-w-0">
-                            <h5 class="font-display font-extrabold text-xs text-slate-900 dark:text-white truncate">${b.title}</h5>
-                            <p class="text-[11px] text-slate-500 dark:text-gray-400 truncate">${b.address} (${b.coords})</p>
-                        </div>
-                        ${cmsData.branches.length > 1 ? `
-                        <button onclick="adminDeleteBranch('${b.id}')" class="px-2.5 py-1 rounded-lg bg-red-500/15 text-red-500 text-xs font-bold shrink-0">
-                            O‘chirish
-                        </button>` : ''}
-                    </div>
-                `).join('');
-            }
-
-            const tgInput = document.getElementById('adm-tg-ids');
-            if (tgInput) tgInput.value = cmsData.telegramChatIds || '8410825829, 36430421';
+        function admPreview(key, src) {
+            const img = document.getElementById(`adm-prev-${key}`);
+            img.src = src;
+            img.classList.toggle('hidden', !src);
         }
 
-        async function adminAddTeacher(e) {
+        async function admPreviewFile(key, input) {
+            const data = await readFileAsDataUrl(input);
+            if (data) admPreview(key, data);
+        }
+
+        function admOpenForm(type, idx = null) {
+            const s = ADM_SCHEMA[type];
+            const item = idx === null ? {} : cmsData[type][idx];
+            admState.editing = { type, idx };
+            document.getElementById('adm-drawer-title').textContent = idx === null ? s.addTitle : s.editTitle;
+            document.getElementById('adm-form-body').innerHTML = s.fields
+                .map(f => admFieldHtml(f, item[f.key] ?? (f.type === 'select' ? Object.keys(f.options)[0] : ''))).join('');
+            document.getElementById('adm-drawer').classList.remove('hidden');
+            setTimeout(() => document.querySelector('#adm-form-body input, #adm-form-body textarea')?.focus(), 50);
+        }
+
+        function admCloseDrawer() {
+            document.getElementById('adm-drawer').classList.add('hidden');
+            admState.editing = null;
+        }
+
+        async function admSubmitForm(e) {
             e.preventDefault();
-            const fileData = await readFileAsDataUrl(document.getElementById('t-add-file'));
-            const urlData = document.getElementById('t-add-url').value.trim();
-            const photo = fileData || urlData || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=80';
+            const { type, idx } = admState.editing;
+            const s = ADM_SCHEMA[type];
+            const form = e.target;
+            const existing = idx === null ? null : cmsData[type][idx];
+            const values = {};
+            let valid = true;
 
-            cmsData.teachers.unshift({
-                id: 't_' + Date.now(),
-                name: document.getElementById('t-add-name').value.trim().toUpperCase(),
-                band: document.getElementById('t-add-band').value.trim(),
-                qualification: document.getElementById('t-add-qual').value.trim(),
-                experience: document.getElementById('t-add-exp').value.trim(),
-                students: document.getElementById('t-add-students').value.trim(),
-                desc: document.getElementById('t-add-desc').value.trim(),
-                photo
-            });
+            for (const f of s.fields) {
+                let v;
+                if (f.type === 'image') {
+                    const file = await readFileAsDataUrl(form.elements[`${f.key}__file`]);
+                    const url = form.elements[f.key].value.trim();
+                    const kept = existing && String(existing[f.key] || '').startsWith('data:') ? existing[f.key] : '';
+                    v = file || url || kept;
+                } else {
+                    v = form.elements[f.key].value.trim();
+                    if (f.upper) v = v.toUpperCase();
+                }
+                let err = '';
+                const hasSvgFallback = f.type === 'image' && existing && existing.svg;
+                if (f.required && !v && !hasSvgFallback) err = 'Bu maydon to‘ldirilishi shart';
+                else if (v && f.pattern && !new RegExp(f.pattern).test(v)) err = 'Noto‘g‘ri format';
+                const errEl = form.querySelector(`[data-err="${f.key}"]`);
+                errEl.textContent = err;
+                errEl.classList.toggle('hidden', !err);
+                if (err) valid = false;
+                values[f.key] = v || f.fallback || '';
+            }
+            if (!valid) return;
 
-            e.target.reset();
-            saveCmsData();
-            renderAdminLists();
+            if (existing) {
+                Object.assign(existing, values);
+                if (type === 'partners' && values.image) existing.svg = '';
+            } else {
+                const item = { id: s.prefix + Date.now(), ...values };
+                if (type === 'courses' && !item.tag) item.tag = 'Yangi kurs';
+                if (type === 'partners') item.svg = '';
+                if (s.onCreate) s.onCreate(item);
+                s.insert === 'start' ? cmsData[type].unshift(item) : cmsData[type].push(item);
+            }
+            admCloseDrawer();
+            if (ADM_SCHEMA[admState.tab] !== s) switchAdminTab(type);
+            admPersist(existing ? 'O‘zgarishlar saqlandi' : 'Yangi yozuv qo‘shildi');
         }
 
-        function adminDeleteTeacher(id) {
-            cmsData.teachers = cmsData.teachers.filter(t => t.id !== id);
-            saveCmsData();
-            renderAdminLists();
-        }
-
-        async function adminAddResult(e) {
-            e.preventDefault();
-            const fileData = await readFileAsDataUrl(document.getElementById('r-add-file'));
-            const urlData = document.getElementById('r-add-url').value.trim();
-
-            cmsData.results.unshift({
-                id: 'r_' + Date.now(),
-                name: document.getElementById('r-add-name').value.trim(),
-                overall: document.getElementById('r-add-overall').value.trim(),
-                l: document.getElementById('r-add-l').value.trim(),
-                r: document.getElementById('r-add-r').value.trim(),
-                w: document.getElementById('r-add-w').value.trim(),
-                s: document.getElementById('r-add-s').value.trim(),
-                trf: String(Math.floor(100000 + Math.random() * 900000)),
-                image: fileData || urlData || ''
-            });
-
-            e.target.reset();
-            saveCmsData();
-            renderAdminLists();
-        }
-
-        function adminDeleteResult(id) {
-            cmsData.results = cmsData.results.filter(r => r.id !== id);
-            saveCmsData();
-            renderAdminLists();
-        }
-
-        function adminAddCourse(e) {
-            e.preventDefault();
-            cmsData.courses.push({
-                id: 'c_' + Date.now(),
-                code: document.getElementById('c-add-code').value.trim().toUpperCase(),
-                tag: 'Yangi kurs',
-                category: document.getElementById('c-add-cat').value,
-                title: document.getElementById('c-add-title').value.trim(),
-                price: document.getElementById('c-add-price').value.trim(),
-                days: document.getElementById('c-add-days').value.trim(),
-                duration: document.getElementById('c-add-dur').value.trim(),
-                desc: document.getElementById('c-add-desc').value.trim()
-            });
-            e.target.reset();
-            saveCmsData();
-            renderAdminLists();
-        }
-
-        function adminSaveCourseRow(idx) {
-            const c = cmsData.courses[idx];
-            if (!c) return;
-            c.title = document.getElementById(`edit-c-title-${idx}`).value.trim();
-            c.price = document.getElementById(`edit-c-price-${idx}`).value.trim();
-            c.days = document.getElementById(`edit-c-days-${idx}`).value.trim();
-            c.duration = document.getElementById(`edit-c-dur-${idx}`).value.trim();
-            c.desc = document.getElementById(`edit-c-desc-${idx}`).value.trim();
-            saveCmsData();
-            renderAdminLists();
-        }
-
-        function adminDeleteCourse(id) {
-            cmsData.courses = cmsData.courses.filter(c => c.id !== id);
-            saveCmsData();
-            renderAdminLists();
-        }
-
-        async function adminAddPartner(e) {
-            e.preventDefault();
-            const fileData = await readFileAsDataUrl(document.getElementById('p-add-file'));
-            const urlData = document.getElementById('p-add-url').value.trim();
-            const img = fileData || urlData;
-            if (!img) return;
-
-            cmsData.partners.push({
-                id: 'p_' + Date.now(),
-                image: img,
-                svg: ''
-            });
-            e.target.reset();
-            saveCmsData();
-            renderAdminLists();
-        }
-
-        function adminDeletePartner(id) {
-            cmsData.partners = cmsData.partners.filter(p => p.id !== id);
-            saveCmsData();
-            renderAdminLists();
-        }
-
-        function adminAddBranch(e) {
-            e.preventDefault();
-            cmsData.branches.unshift({
-                id: 'b_' + Date.now(),
-                title: document.getElementById('b-add-title').value.trim(),
-                address: document.getElementById('b-add-address').value.trim(),
-                landmark: document.getElementById('b-add-landmark').value.trim(),
-                coords: document.getElementById('b-add-coords').value.trim()
-            });
-            saveCmsData();
-            renderAdminLists();
-        }
-
-        function adminDeleteBranch(id) {
-            cmsData.branches = cmsData.branches.filter(b => b.id !== id);
-            saveCmsData();
-            renderAdminLists();
+        // ---- Settings ----
+        function admRenderSettings() {
+            const section = (title, desc, body) => `
+                <div class="${ADM_CARD} grid md:grid-cols-3 gap-4 p-5">
+                    <div><h3 class="font-semibold text-sm">${title}</h3><p class="text-xs text-slate-500 dark:text-gray-400 mt-1">${desc}</p></div>
+                    <div class="md:col-span-2 space-y-3">${body}</div>
+                </div>`;
+            document.getElementById('adm-content').innerHTML = `
+                <div class="mb-6"><h1 class="text-xl font-semibold">Sozlamalar</h1><p class="text-sm text-slate-500 dark:text-gray-400">Tizim parametrlari va ma’lumotlar zaxirasi.</p></div>
+                <div class="space-y-4 max-w-4xl">
+                    ${section('Telegram bot', 'Saytdan kelgan arizalar shu chat ID’larga yuboriladi. Bir nechta ID vergul bilan ajratiladi.', `
+                        <input id="adm-tg-ids" type="text" value="${admEsc(cmsData.telegramChatIds || '')}" placeholder="8410825829, 36430421" class="${ADM_INPUT} font-mono"/>
+                        <button onclick="saveTelegramIdsFromAdmin()" class="${ADM_BTN_PRIMARY}">Saqlash</button>`)}
+                    ${section('Zaxira nusxa', 'Barcha ma’lumotlarni JSON fayl sifatida yuklab oling yoki avvalgi nusxani tiklang.', `
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="admExportData()" class="${ADM_BTN_GHOST}">${admIcon('download')}Eksport (JSON)</button>
+                            <label class="${ADM_BTN_GHOST} cursor-pointer">${admIcon('upload')}Import (JSON)<input type="file" accept="application/json" class="hidden" onchange="admImportData(this)"/></label>
+                        </div>`)}
+                    ${section('Xavfli hudud', 'Barcha o‘zgarishlarni bekor qilib, saytni boshlang‘ich ma’lumotlarga qaytaradi.', `
+                        <button onclick="admConfirm('Barcha o‘zgarishlaringiz o‘chiriladi va boshlang‘ich ma’lumotlar tiklanadi.', () => { resetToDefaultFakeData(); admToast('Boshlang‘ich holat tiklandi'); })" class="${ADM_BTN} bg-red-600 hover:bg-red-700 text-white">↺ Boshlang‘ich holatga qaytarish</button>`)}
+                </div>`;
         }
 
         function saveTelegramIdsFromAdmin() {
             cmsData.telegramChatIds = document.getElementById('adm-tg-ids').value.trim();
-            saveCmsData();
-            const badge = document.getElementById('adm-tg-saved');
-            badge.classList.remove('hidden');
-            setTimeout(() => badge.classList.add('hidden'), 2500);
+            admPersist('Telegram ID’lar saqlandi');
+        }
+
+        function admExportData() {
+            const blob = new Blob([JSON.stringify(cmsData, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `olc-cms-${new Date().toISOString().slice(0, 10)}.json`;
+            a.click();
+            URL.revokeObjectURL(a.href);
+        }
+
+        function admImportData(input) {
+            const file = input.files && input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+                try {
+                    const data = JSON.parse(reader.result);
+                    if (!Array.isArray(data.teachers) || !Array.isArray(data.courses)) throw new Error('invalid');
+                    cmsData = { ...getDefaultCmsData(), ...data };
+                    admPersist('Ma’lumotlar tiklandi');
+                } catch (err) {
+                    admToast('Fayl formati noto‘g‘ri', 'error');
+                }
+                input.value = '';
+            };
+            reader.readAsText(file);
+        }
+
+        // ---- Confirm & toasts ----
+        function admConfirm(text, onOk) {
+            admState.confirmAction = onOk;
+            document.getElementById('adm-confirm-text').textContent = text;
+            const box = document.getElementById('adm-confirm');
+            box.classList.remove('hidden');
+            box.classList.add('flex');
+        }
+
+        function admCloseConfirm() {
+            const box = document.getElementById('adm-confirm');
+            box.classList.add('hidden');
+            box.classList.remove('flex');
+            admState.confirmAction = null;
+        }
+
+        document.getElementById('adm-confirm-ok').addEventListener('click', () => {
+            const action = admState.confirmAction;
+            admCloseConfirm();
+            if (action) action();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key !== 'Escape') return;
+            if (admState.confirmAction) admCloseConfirm();
+            else if (admState.editing) admCloseDrawer();
+        });
+
+        function admToast(message, type = 'success') {
+            const el = document.createElement('div');
+            el.className = `adm-toast flex items-center gap-2 px-4 py-3 rounded-lg shadow-lg text-sm font-medium border ${type === 'error' ? 'bg-red-50 dark:bg-red-950 border-red-200 dark:border-red-900 text-red-700 dark:text-red-300' : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-white/10 text-slate-800 dark:text-white'}`;
+            el.innerHTML = `<span>${type === 'error' ? '⚠️' : '✅'}</span><span>${admEsc(message)}</span>`;
+            document.getElementById('adm-toasts').appendChild(el);
+            setTimeout(() => el.remove(), 2800);
         }
 
         const carouselState = {
@@ -2524,7 +2616,7 @@
                 btn_enroll: "Kursga yozilish",
                 dock_enroll: "Yozilish",
                 btn_view_courses: "Kurslarni ko‘rish",
-                hero_title: "BILIM SARI QADAM QU‘YING. KELAJAGINGIZNI YARATING!",
+                hero_title: "BILIM SARI QADAM QO‘YING. KELAJAGINGIZNI YARATING!",
                 hero_desc: "Original Learning Center’da xorijiy tillar, IELTS, CEFR, matematika va mental arifmetikani o‘rganing. Maqsadlaringiz sari ishonch bilan harakat qiling!",
                 about_title: "Original Learning Center — bilim va imkoniyatlar maskani",
                 about_p1: "Original Learning Center — xorijiy tillar, aniq fanlar va intellektual ko‘nikmalarni rivojlantirishga yo‘naltirilgan ta’lim markazi. Markazimizda o‘quvchilar ingliz tili, IELTS, CEFR, matematika, mental arifmetika va boshqa tillarni o‘rganish imkoniyatiga ega.",
@@ -2541,7 +2633,7 @@
                 pricing_subtitle: "Har bir kursning oylik to‘lovi, haftalik darslar soni va davomiyligi bilan tanishing.",
                 partners_title: "BIZNING HAMKORLARIMIZ",
                 loc_title: "BIZNING MANZILIMIZ",
-                loc_subtitle: "Filialimiz Dushanbadan–Shanbagacha, soat 08:00 dan 20:00 gacha ishlaydi.",
+                loc_subtitle: "Filialimiz dushanbadan shanbagacha, soat 08:00 dan 20:00 gacha ishlaydi.",
                 faq_title: "Ko‘p so‘raladigan savollar",
                 contact_title: "Biz bilan bog‘laning",
                 btn_call: "Qo‘ng‘iroq",
@@ -2833,10 +2925,7 @@
             startAutoCarousels();
 
             if (window.location.hash === '#admin') {
-                isAdminAuthenticated = true;
-                sessionStorage.setItem('olc_admin_logged', 'true');
-                updateAdminHeaderButton();
-                openAdminDashboard();
+                handleAdminTrigger();
             }
 
             document.addEventListener('click', (e) => {
